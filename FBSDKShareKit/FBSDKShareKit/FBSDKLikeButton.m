@@ -100,6 +100,9 @@
 {
   [self _ensureLikeActionController:YES];
   [super layoutSubviews];
+
+  // Apptly Change
+  self.titleLabel.center = CGPointMake(self.titleLabel.center.x - 5, self.titleLabel.center.y);
 }
 
 #pragma mark - FBSDKButtonImpressionTracking

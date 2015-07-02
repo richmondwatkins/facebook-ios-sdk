@@ -28,6 +28,11 @@
 #define kFBLikeControlAnimationDuration 0.2
 #define kFBLikeControlSocialSentenceAnimationOffset 10.0
 
+// Apptly Change
+@interface FBSDKLikeControl()
+@property CGRect customFrame;
+@end
+
 static void *FBSDKLikeControlKVOLikeActionControllerContext = &FBSDKLikeControlKVOLikeActionControllerContext;
 
 NSString *NSStringFromFBSDKLikeControlAuxiliaryPosition(FBSDKLikeControlAuxiliaryPosition auxiliaryPosition)
@@ -100,7 +105,9 @@ typedef CGSize (^fbsdk_like_control_sizing_block_t)(UIView *subview, CGSize cons
 - (instancetype)initWithFrame:(CGRect)frame
 {
   if ((self = [super initWithFrame:frame])) {
-    [self _initializeContent];
+    self.customFrame = frame;
+    
+    [self _initializeContentWithFrame:frame];
     if (CGRectEqualToRect(frame, CGRectZero)) {
       [self sizeToFit];
     }
@@ -111,7 +118,7 @@ typedef CGSize (^fbsdk_like_control_sizing_block_t)(UIView *subview, CGSize cons
 - (id)initWithCoder:(NSCoder *)decoder
 {
   if ((self = [super initWithCoder:decoder])) {
-    [self _initializeContent];
+    [self _initializeContentWithFrame:CGRectZero];
   }
   return self;
 }
@@ -261,7 +268,8 @@ typedef CGSize (^fbsdk_like_control_sizing_block_t)(UIView *subview, CGSize cons
   _likeBoxView.hidden = (_likeBoxView != auxiliaryView);
   _socialSentenceLabel.hidden = (_socialSentenceLabel != auxiliaryView);
 
-  _likeButtonContainer.frame = layout.likeButtonFrame;
+      // Apptly Change
+  _likeButtonContainer.frame = self.customFrame;
   _likeButton.frame = _likeButtonContainer.bounds;
   auxiliaryView.frame = layout.auxiliaryViewFrame;
 }
@@ -342,29 +350,37 @@ typedef CGSize (^fbsdk_like_control_sizing_block_t)(UIView *subview, CGSize cons
 {
   [self _ensureLikeActionController];
   [self sendActionsForControlEvents:UIControlEventTouchUpInside];
+
+  // Apptly Change
+  [UIView animateWithDuration:0.05 animations:^{
+        likeButton.transform = CGAffineTransformIdentity;
+  }];
 }
 
-- (void)_initializeContent
+- (void)_initializeContentWithFrame:(CGRect)frame
 {
   self.backgroundColor = [UIColor clearColor];
   _foregroundColor = [UIColor blackColor];
 
-  _likeButtonContainer = [[UIView alloc] initWithFrame:CGRectZero];
+  _likeButtonContainer = [[UIView alloc] initWithFrame:frame];
   _likeButtonContainer.backgroundColor = self.backgroundColor;
   _likeButtonContainer.opaque = self.opaque;
   [self addSubview:_likeButtonContainer];
 
-  _likeButton = [[FBSDKLikeButton alloc] initWithFrame:CGRectZero];
+  _likeButton = [[FBSDKLikeButton alloc] initWithFrame:frame];
   [_likeButton addTarget:self action:@selector(_handleLikeButtonTap:) forControlEvents:UIControlEventTouchUpInside];
   [_likeButtonContainer addSubview:_likeButton];
 
-  _socialSentenceLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+  _socialSentenceLabel = [[UILabel alloc] initWithFrame:frame];
   _socialSentenceLabel.font = [UIFont systemFontOfSize:11.0];
   _socialSentenceLabel.numberOfLines = 2;
   [self addSubview:_socialSentenceLabel];
 
-  _likeBoxView = [[FBSDKLikeBoxView alloc] initWithFrame:CGRectZero];
+  _likeBoxView = [[FBSDKLikeBoxView alloc] initWithFrame:frame];
   [self addSubview:_likeBoxView];
+
+  // Apptly Change
+  [_likeButton addTarget:self action:@selector(handleLikeButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
 
   // use KVO to monitor changes to the likeActionController instance on FBSDKButton in order to avoid race conditions
   // between notification observers
