@@ -357,10 +357,12 @@
     [self setTitle:selectedTitle forState:UIControlStateSelected | UIControlStateHighlighted];
   }
 
+  // Apptly Change
   UILabel *titleLabel = self.titleLabel;
   titleLabel.lineBreakMode = NSLineBreakByClipping;
-  UIFont *font = [UIFont boldSystemFontOfSize:14.0];
+  UIFont *font = [UIFont boldSystemFontOfSize:18.0];
   titleLabel.font = font;
+  titleLabel.textAlignment = NSTextAlignmentCenter;
 
   CGSize imageSize = CGSizeMake(font.pointSize, font.pointSize);
   UIImage *image = [icon imageWithSize:imageSize];
