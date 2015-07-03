@@ -3,7 +3,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "FBSDKCoreKit-Apptly"
-  s.version      = "0.0.4"
+  s.version      = "0.0.5"
   s.summary      = "Official Facebook SDK for iOS to access Facebook Platform's core features"
 
   s.description  = <<-DESC
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "7.0"
 
   s.source       = { :git => "https://github.com/richmondwatkins/facebook-ios-sdk.git",
-                     :tag => "apptly-0.0.4"
+                     :tag => "apptly-0.0.5"
                     }
 
   s.weak_frameworks = "Accounts", "CoreLocation", "Social", "Security", "QuartzCore", "CoreGraphics", "UIKit", "Foundation", "AudioToolbox"
@@ -30,13 +30,13 @@ Pod::Spec.new do |s|
   s.header_dir = "FBSDKCoreKit"
 
   # set header_mappings_dir to resolve our quoted imports in the +Internal file.
-  s.header_mappings_dir = "FBSDKCoreKit/FBSDKCoreKit/Internal"
+  s.header_mappings_dir = "FBSDKCoreKit-Apptly/FBSDKCoreKit/Internal"
 
   # The following subspecs are only to disable ARC on certain files. They should not be used as dependencies in your Podfile.
   s.subspec 'arc' do |sp|
-    sp.public_header_files = "FBSDKCoreKit/FBSDKCoreKit/*.h"
-    sp.source_files   = "FBSDKCoreKit/FBSDKCoreKit/**/*.{h,m}"
-    sp.exclude_files = "FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKDynamicFrameworkLoader.m"
+    sp.public_header_files = "FBSDKCoreKit-Apptly/FBSDKCoreKit/*.h"
+    sp.source_files   = "FBSDKCoreKit-Apptly/FBSDKCoreKit/**/*.{h,m}"
+    sp.exclude_files = "FBSDKCoreKit-Apptly/FBSDKCoreKit/Internal/FBSDKDynamicFrameworkLoader.m"
     sp.requires_arc = true
   end
 
