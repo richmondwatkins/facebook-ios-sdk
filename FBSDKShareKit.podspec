@@ -2,8 +2,8 @@
 
 Pod::Spec.new do |s|
 
-  s.name         = "FBSDKShareKit-Apptly"
-  s.version      = "0.0.3"
+  s.name         = "FBSDKShareKit"
+  s.version      = "0.0.7"
   s.summary      = "Official Facebook SDK for iOS to access Facebook Platform's Sharing Features"
 
   s.description  = <<-DESC
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "7.0"
 
   s.source       = { :git => "https://github.com/richmondwatkins/facebook-ios-sdk.git",
-                     :tag => "apptly-0.0.3"
+                     :tag => "apptly-0.0.7"
                     }
 
   s.weak_frameworks = "Accounts", "CoreLocation", "Social", "Security", "QuartzCore", "CoreGraphics", "UIKit", "Foundation", "AudioToolbox"
@@ -30,6 +30,6 @@ Pod::Spec.new do |s|
   s.source_files   = "FBSDKShareKit/FBSDKShareKit/**/*.{h,m}"
   s.public_header_files = "FBSDKShareKit/FBSDKShareKit/*.{h}"
   s.header_dir = "FBSDKShareKit"
-  s.dependency 'FBSDKCoreKit'
+  # s.dependency 'FBSDKCoreKit'
 
 end

@@ -2,8 +2,8 @@
 
 Pod::Spec.new do |s|
 
-  s.name         = "FBSDKCoreKit-Apptly"
-  s.version      = "0.0.4"
+  s.name         = "FBSDKCoreKit"
+  s.version      = "0.0.7"
   s.summary      = "Official Facebook SDK for iOS to access Facebook Platform's core features"
 
   s.description  = <<-DESC
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "7.0"
 
   s.source       = { :git => "https://github.com/richmondwatkins/facebook-ios-sdk.git",
-                     :tag => "apptly-0.0.4"
+                     :tag => "apptly-0.0.7"
                     }
 
   s.weak_frameworks = "Accounts", "CoreLocation", "Social", "Security", "QuartzCore", "CoreGraphics", "UIKit", "Foundation", "AudioToolbox"
@@ -40,9 +40,9 @@ Pod::Spec.new do |s|
     sp.requires_arc = true
   end
 
-  # s.subspec 'no-arc' do |sp|
-  #   sp.source_files = "FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKDynamicFrameworkLoader.m"
-  #   sp.requires_arc = false
-  #   sp.dependency 'FBSDKCoreKit/arc'
-  # end
+  s.subspec 'no-arc' do |sp|
+    sp.source_files = "FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKDynamicFrameworkLoader.m"
+    sp.requires_arc = false
+    sp.dependency 'FBSDKCoreKit/arc'
+  end
 end
