@@ -3,7 +3,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "FBSDKCoreKit-Apptly"
-  s.version      = "0.0.5"
+  s.version      = "0.0.6"
   s.summary      = "Official Facebook SDK for iOS to access Facebook Platform's core features"
 
   s.description  = <<-DESC
@@ -20,14 +20,14 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "7.0"
 
   s.source       = { :git => "https://github.com/richmondwatkins/facebook-ios-sdk.git",
-                     :tag => "apptly-0.0.5"
+                     :tag => "apptly-0.0.6"
                     }
 
   s.weak_frameworks = "Accounts", "CoreLocation", "Social", "Security", "QuartzCore", "CoreGraphics", "UIKit", "Foundation", "AudioToolbox"
 
   s.dependency 'Bolts', '~> 1.1'
 
-  s.header_dir = "FBSDKCoreKit"
+  s.header_dir = "FBSDKCoreKit-Apptly"
 
   # set header_mappings_dir to resolve our quoted imports in the +Internal file.
   s.header_mappings_dir = "FBSDKCoreKit-Apptly/FBSDKCoreKit/Internal"
@@ -40,9 +40,9 @@ Pod::Spec.new do |s|
     sp.requires_arc = true
   end
 
-  # s.subspec 'no-arc' do |sp|
-  #   sp.source_files = "FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKDynamicFrameworkLoader.m"
-  #   sp.requires_arc = false
-  #   sp.dependency 'FBSDKCoreKit/arc'
-  # end
+  s.subspec 'no-arc' do |sp|
+    sp.source_files = "FBSDKCoreKit-Apptly/FBSDKCoreKit/Internal/FBSDKDynamicFrameworkLoader.m"
+    sp.requires_arc = false
+    sp.dependency 'FBSDKCoreKit-Apptly/arc'
+  end
 end
